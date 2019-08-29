@@ -5,7 +5,9 @@ services:
     build: ./src
     volumes:
       - ./src:/src
+      - ./data:/data # Copy directory with JSON data file to /data
     ports:
       - 8080:5000
     environment:
       - DEBUG=true
+      - DATA_FILE=fruit_data.json
