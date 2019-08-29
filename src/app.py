@@ -15,18 +15,12 @@ def hello(name):
 @app.route('/<string:commodity>/<int:price_per_ton>/<int:trade_volume>', methods=['POST'])
 def _fruitpal(commodity, price_per_ton, trade_volume):
     fp = fruitpal.Fruitpal()
-    return '\n'.join(
-        f"{i[0]} {i[1]:.2f} | {i[2]}"
-        for i in sorted(
-            fp.calculate_and_list_prices(
-                commodity,
-                price_per_ton,
-                trade_volume
-            ),
-            key=lambda x: x[1],
-            reverse=True
-        )
+    results = fp.calculate_and_list_prices(
+        commodity,
+        price_per_ton,
+        trade_volume
     )
+    return fruitpal.Fruitpal.format_data(results)
 
 
 if __name__ == '__main__':
