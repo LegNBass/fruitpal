@@ -12,7 +12,7 @@ def hello(name):
     return f"Hello {name}"
 
 
-@app.route('/<string:commodity>/<int:price_per_ton>/<int:trade_volume>')
+@app.route('/<string:commodity>/<int:price_per_ton>/<int:trade_volume>', methods=['POST'])
 def _fruitpal(commodity, price_per_ton, trade_volume):
     return fruitpal.list_results(commodity, price_per_ton, trade_volume)
 
