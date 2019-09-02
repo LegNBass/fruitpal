@@ -22,5 +22,11 @@
         "COMMODITY":"mango",
         "FIXED_OVERHEAD": 20.00,
         "VARIABLE_OVERHEAD": 1.42
+    },
+    { 
+        "COUNTRY":23,
+        "COMMODITY":123,
+        "FIXED_OVERHEAD": "20.00",
+        "VARIABLE_OVERHEAD": 1.42
     }
 ]
