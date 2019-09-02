@@ -26,19 +26,20 @@ class Fruitpal:
                         'variable': float(i['VARIABLE_OVERHEAD'])
                     }
                     self.prices[i['COMMODITY']][i['COUNTRY']] = overhead
-                except ValueError:
+                except (ValueError, KeyError):
                     self.bad_entries = i
 
     def calculate_and_list_prices(self, comm, ppt, t_vol, path=None):
-        self.load_data(path=path)
+        if not self.prices:
+            self.load_data(path=path)
 
         result_list = []
-        for country, overhead in self.prices.get(comm, {}).items():
+        for country, overhead in self.prices.get(comm.lower(), {}).items():
             total_ppt = ppt + overhead['variable']
             result_list.append((
                 country,  # Country Code
                 total_ppt * t_vol + overhead['fixed'],  # Total cost of trade
-                f"({total_ppt}*{t_vol})+{overhead['fixed']}"  # Breakdown of trade cost calculation
+                f"({total_ppt:.2f}*{t_vol:.2f})+{overhead['fixed']}"  # Breakdown of trade cost calculation
             ))
         return result_list
 
@@ -82,12 +83,14 @@ if __name__ == '__main__':
     # Perform the actual calculation
     fp = Fruitpal()
     try:
+        fp.load_data(args.path)
         results = fp.calculate_and_list_prices(
             args.commodity,
             float(args.price_per_ton),
             float(args.trade_volume),
-            args.path
         )
+        if not results:
+            print("No data found for selected item")
         print(Fruitpal.format_data(results))
     except ValueError:
         print(
