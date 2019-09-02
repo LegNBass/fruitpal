@@ -2,9 +2,9 @@ version: '0'
 services:
   fruitpal:
     container_name: fruitpal
-    build: ./src
+    build: ./app
     volumes:
-      - ./src:/src
+      - ./app:/app
       - ./data:/data # Copy directory with JSON data file to /data
     ports:
       - 8080:5000
