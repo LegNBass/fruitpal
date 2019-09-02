@@ -24,5 +24,4 @@ class TestFruitpal:
         result = fruitpal.Fruitpal.format_data(
             [('Foo', 1234, '(1*2)+3')]
         )
-        print(result)
         assert re.match(r'\w+ [0-9\.]+ | ([0-9\.]+\*[0-9\.]+)\+[0-9\.]+', result)
