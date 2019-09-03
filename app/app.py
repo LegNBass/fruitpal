@@ -21,7 +21,7 @@ def hello(name):
     return f"Hello {name}"
 
 
-@app.route('/<string:commodity>/<float:price_per_ton>/<float:trade_volume>', methods=['POST'])
+@app.route('/<string:commodity>/<float:price_per_ton>/<float:trade_volume>', methods=['GET'])
 def _fruitpal(commodity, price_per_ton, trade_volume):
     fp = fruitpal.Fruitpal()
     fp.load_data()
