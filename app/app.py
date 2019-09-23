@@ -23,8 +23,6 @@ def hello(name):
 
 @app.route('/<string:commodity>/<float:price_per_ton>/<float:trade_volume>', methods=['GET'])
 def _fruitpal(commodity, price_per_ton, trade_volume):
-    fp = fruitpal.Fruitpal()
-    fp.load_data()
     results = fp.calculate_and_list_prices(
         commodity,
         price_per_ton,
@@ -34,6 +32,8 @@ def _fruitpal(commodity, price_per_ton, trade_volume):
 
 
 if __name__ == '__main__':
+    fp = fruitpal.Fruitpal()
+    fp.load_data()
     app.run(
         host='0.0.0.0',
         debug=os.environ.get('DEBUG', False)

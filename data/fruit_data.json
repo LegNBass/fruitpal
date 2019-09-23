@@ -7,8 +7,14 @@
     },
     {
         "COUNTRY":"BR",
-        "COMMODITY":"mango",
+        "COMMODITY":"oranges",
         "FIXED_OVERHEAD":"20.00",
         "VARIABLE_OVERHEAD":"1.42"
+    },
+    {
+        "COUNTRY":"BR",
+        "COMMODITY":"default",
+        "FIXED_OVERHEAD":"1.00",
+        "VARIABLE_OVERHEAD":"0.42"
     }
 ]

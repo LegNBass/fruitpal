@@ -25,7 +25,7 @@ class Fruitpal:
                         'fixed': float(i['FIXED_OVERHEAD']),
                         'variable': float(i['VARIABLE_OVERHEAD'])
                     }
-                    self.prices[i['COMMODITY']][i['COUNTRY']] = overhead
+                    self.prices[i['COUNTRY']][i['COMMODITY']] = overhead
                 except (ValueError, KeyError):
                     self.bad_entries = i
 
@@ -34,7 +34,11 @@ class Fruitpal:
             self.load_data(path=path)
 
         result_list = []
-        for country, overhead in self.prices.get(comm.lower(), {}).items():
+
+        for country, info in self.prices.items():
+            overhead = info.get(comm, info.get('default', {}))
+            if not overhead:
+                continue
             total_ppt = ppt + overhead['variable']
             result_list.append((
                 country,  # Country Code
